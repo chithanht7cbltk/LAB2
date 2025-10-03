@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "software_timer.h"
+#include "ex1.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -95,12 +96,26 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   setTimer1(100);
+  HAL_GPIO_WritePin(GPIOA, EN0_Pin | EN1_Pin, SET);
+  HAL_GPIO_WritePin(GPIOB, SEG0_Pin | SEG1_Pin | SEG2_Pin | SEG3_Pin | SEG4_Pin | SEG5_Pin | SEG6_Pin, SET);
+  int i = 0;
   while (1)
   {
 	  if (timer1_flag == 1){
 		  setTimer1(100);
-		  //TODO
+		  //TASK RED_LED PA5
 		  HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin);
+		  //TASK MAIN
+		  if (i == 0){
+			  ValidPin(0);
+			  display7SEG(1);
+		  }
+		  if(i == 1){
+			  ValidPin(1);
+			  display7SEG(2);
+		  }
+		  i++;
+		  if(i >= 2) i = 0;
 	  }
     /* USER CODE END WHILE */
 
