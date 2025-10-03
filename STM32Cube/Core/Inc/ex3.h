@@ -10,11 +10,9 @@
 
 #include "main.h"
 
-#define LED1 1
-#define LED2 2
-
 void clearAll();
 void ValidPin(int index);
 void display7SEG(int num);
+void update7SEG(int index);
 
 #endif /* INC_EX2_H_ */

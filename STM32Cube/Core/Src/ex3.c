@@ -5,31 +5,25 @@
  *      Author: cthanh
  */
 
-#include "ex2.h"
+#include "ex3.h"
+
+void clearAll(){
+	HAL_GPIO_WritePin(GPIOA, EN0_Pin | EN1_Pin | EN2_Pin | EN3_Pin , SET);
+	HAL_GPIO_WritePin(GPIOB, SEG0_Pin | SEG1_Pin | SEG2_Pin | SEG3_Pin | SEG4_Pin | SEG5_Pin | SEG6_Pin, SET);
+}
 
 void ValidPin(int index){
+	clearAll();
 	if (index == 0){
 		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, RESET);
-		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
-		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
-		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
 	}
 	if (index == 1){
-		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
 		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, RESET);
-		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
-		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
 	}
 	if (index == 2){
-		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
-		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
 		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, RESET);
-		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
 	}
 	if (index == 3){
-		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
-		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
-		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
 		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, RESET);
 	}
 }
@@ -125,6 +119,32 @@ void display7SEG(int num){
 		HAL_GPIO_WritePin(SEG4_GPIO_Port, SEG4_Pin, RESET);
 		HAL_GPIO_WritePin(SEG5_GPIO_Port, SEG5_Pin, RESET);
 		HAL_GPIO_WritePin(SEG6_GPIO_Port, SEG6_Pin, SET);
+		break;
+	default:
+		break;
+	}
+}
+
+const int MAX_LED = 4;
+int index_led = 0;
+int led_buffer[4] = {1, 2, 3, 4};
+void update7SEG(int index){
+	switch (index){
+	case 0:
+		ValidPin(index);
+		display7SEG(led_buffer[index]);
+		break;
+	case 1:
+		ValidPin(index);
+		display7SEG(led_buffer[index]);
+		break;
+	case 2:
+		ValidPin(index);
+		display7SEG(led_buffer[index]);
+		break;
+	case 3:
+		ValidPin(index);
+		display7SEG(led_buffer[index]);
 		break;
 	default:
 		break;
