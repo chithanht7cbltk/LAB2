@@ -23,7 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "software_timer.h"
-#include "ex3.h"
+#include "ex4.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -100,6 +100,7 @@ void display7SEG(int num);
   setTimer(1, 50);
   clearAll();
   timer_flag[1] = 1;
+  timer_flag[0] = 1;
   int led_index = 0;
   while (1)
   {
@@ -110,7 +111,7 @@ void display7SEG(int num);
 		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
 	  }
 	  if (timer_flag[1] == 1){
-		  setTimer(1, 50);
+		  setTimer(1, 25);
 		  //TASK MAIN
 		  update7SEG(led_index);
 		  led_index = (led_index + 1) % 4;
