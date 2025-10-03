@@ -75,7 +75,8 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+void ValidPin(int index);
+void display7SEG(int num);
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -94,13 +95,40 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer1(100);
+  setTimer1(50);
+  setTimer2(50);
+    HAL_GPIO_WritePin(GPIOA, EN0_Pin | EN1_Pin | EN2_Pin | EN3_Pin , SET);
+    HAL_GPIO_WritePin(GPIOB, SEG0_Pin | SEG1_Pin | SEG2_Pin | SEG3_Pin | SEG4_Pin | SEG5_Pin | SEG6_Pin, SET);
+    int i = 0;
   while (1)
   {
 	  if (timer1_flag == 1){
 		  setTimer1(100);
 		  //TODO
 		  HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin);
+		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+	  }
+	  if (timer2_flag == 1){
+		  setTimer2(50);
+		  //TASK MAIN
+		  if (i == 0){
+			  ValidPin(0);
+			  display7SEG(1);
+		  }
+		  if(i == 1){
+			  ValidPin(1);
+			  display7SEG(2);
+		  }
+		  if(i == 2){
+			  ValidPin(2);
+			  display7SEG(3);
+		  }
+		  if(i == 3){
+			  ValidPin(3);
+			  display7SEG(0);
+		  }
+		  i++;
+		  if(i >= 4) i = 0;
 	  }
     /* USER CODE END WHILE */
 
@@ -204,16 +232,16 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, DOT_Pin|RED_LED_Pin|EN0_Pin|EN1_Pin
-                          |EN3_Pin|EN4_Pin, GPIO_PIN_RESET);
+                          |EN2_Pin|EN3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, SEG0_Pin|SEG1_Pin|SEG2_Pin|SEG3_Pin
                           |SEG4_Pin|SEG5_Pin|SEG6_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : DOT_Pin RED_LED_Pin EN0_Pin EN1_Pin
-                           EN3_Pin EN4_Pin */
+                           EN2_Pin EN3_Pin */
   GPIO_InitStruct.Pin = DOT_Pin|RED_LED_Pin|EN0_Pin|EN1_Pin
-                          |EN3_Pin|EN4_Pin;
+                          |EN2_Pin|EN3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
