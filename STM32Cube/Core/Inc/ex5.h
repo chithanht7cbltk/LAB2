@@ -10,9 +10,12 @@
 
 #include "main.h"
 
+int hour, minute, second;
+
 void clearAll();
 void ValidPin(int index);
 void display7SEG(int num);
 void update7SEG(int index);
+void updateClockBuffer();
 
 #endif /* INC_EX2_H_ */

@@ -23,7 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "software_timer.h"
-#include "ex4.h"
+#include "ex5.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -96,26 +96,44 @@ void display7SEG(int num);
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer(0, 50);
-  setTimer(1, 50);
+  int index_led = 0;
+  hour = 12, minute = 20, second = 30;
+
+
   clearAll();
-  timer_flag[1] = 1;
   timer_flag[0] = 1;
-  int led_index = 0;
+  timer_flag[1] = 1;
+  timer_flag[2] = 1;
   while (1)
   {
-	  if (timer_flag[0] == 1){
-		  setTimer(0, 100);
-		  //TODO PA5
-		  HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin);
-		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
-	  }
-	  if (timer_flag[1] == 1){
-		  setTimer(1, 25);
-		  //TASK MAIN
-		  update7SEG(led_index);
-		  led_index = (led_index + 1) % 4;
-	  }
+  	  if (timer_flag[0] == 1){
+  		  setTimer(0, 100);
+  		  //TODO PA5
+  		  HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin);
+  		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+  	  }
+  	  if (timer_flag[1] == 1){
+  		  setTimer(1, 25);
+  		  //TASK MAIN
+  		  update7SEG(index_led);
+  		  index_led = (index_led + 1) % 4;
+  	  }
+  	  if (timer_flag[2] == 1){
+  		  setTimer(2, 100);
+  		  second++;
+  		  if (second >= 60){
+  			  second = 0;
+  			  minute++;
+  		  }
+  		  if (minute >= 60){
+  			  minute = 0;
+  			  hour++;
+  		  }
+  		  if (hour >= 24){
+  			  hour = 0;
+  		  }
+  		  updateClockBuffer();
+  	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

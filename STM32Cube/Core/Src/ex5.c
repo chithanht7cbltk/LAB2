@@ -5,7 +5,7 @@
  *      Author: cthanh
  */
 
-#include "ex4.h"
+#include "ex5.h"
 
 void clearAll(){
 	HAL_GPIO_WritePin(GPIOA, EN0_Pin | EN1_Pin | EN2_Pin | EN3_Pin , SET);
@@ -131,22 +131,28 @@ int led_buffer[4] = {1, 2, 3, 4};
 void update7SEG(int index){
 	switch (index){
 	case 0:
-		ValidPin(index);
-		display7SEG(led_buffer[index]);
+		ValidPin(0);
+		display7SEG(led_buffer[0]);
 		break;
 	case 1:
-		ValidPin(index);
-		display7SEG(led_buffer[index]);
+		ValidPin(1);
+		display7SEG(led_buffer[1]);
 		break;
 	case 2:
-		ValidPin(index);
-		display7SEG(led_buffer[index]);
+		ValidPin(2);
+		display7SEG(led_buffer[2]);
 		break;
 	case 3:
-		ValidPin(index);
-		display7SEG(led_buffer[index]);
+		ValidPin(3);
+		display7SEG(led_buffer[3]);
 		break;
 	default:
 		break;
 	}
+}
+void updateClockBuffer(){
+	led_buffer[0] = hour / 10;
+	led_buffer[1] = hour % 10;
+	led_buffer[2] = minute / 10;
+	led_buffer[3] = minute % 10;
 }

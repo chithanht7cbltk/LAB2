@@ -25,7 +25,7 @@ int isTimerExpired(int index){
 }
 
 void timerRun(){
-	for (int i = 0; i < 2; i++){
+	for (int i = 0; i < 3; i++){
 		if (timer_counter[i]> 0){
 			timer_counter[i]--;
 			if (timer_counter[i] <= 0){
