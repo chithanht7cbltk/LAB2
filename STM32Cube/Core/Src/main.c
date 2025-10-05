@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "software_timer.h"
+#include "ex6.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -95,40 +96,13 @@ void display7SEG(int num);
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer1(50);
-  setTimer2(50);
-    HAL_GPIO_WritePin(GPIOA, EN0_Pin | EN1_Pin | EN2_Pin | EN3_Pin , SET);
-    HAL_GPIO_WritePin(GPIOB, SEG0_Pin | SEG1_Pin | SEG2_Pin | SEG3_Pin | SEG4_Pin | SEG5_Pin | SEG6_Pin, SET);
-    int i = 0;
+  setTimer(0, 1000);
+  clearAll();
   while (1)
   {
-	  if (timer1_flag == 1){
-		  setTimer1(100);
-		  //TODO
-		  HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin);
-		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
-	  }
-	  if (timer2_flag == 1){
-		  setTimer2(50);
-		  //TASK MAIN
-		  if (i == 0){
-			  ValidPin(0);
-			  display7SEG(1);
-		  }
-		  if(i == 1){
-			  ValidPin(1);
-			  display7SEG(2);
-		  }
-		  if(i == 2){
-			  ValidPin(2);
-			  display7SEG(3);
-		  }
-		  if(i == 3){
-			  ValidPin(3);
-			  display7SEG(0);
-		  }
-		  i++;
-		  if(i >= 4) i = 0;
+	  if (timer_flag[0] == 1){
+	  		HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin);
+	  		setTimer(0, 2000);
 	  }
     /* USER CODE END WHILE */
 

@@ -1,0 +1,3 @@
+ex6.c:10:6:clearAll	8	static
+ex6.c:16:6:ValidPin	16	static
+ex6.c:32:6:display7SEG	16	static
