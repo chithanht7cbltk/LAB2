@@ -23,7 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "software_timer.h"
-#include "ex5.h"
+#include "ex7.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -99,27 +99,29 @@ void display7SEG(int num);
   int index_led = 0;
   hour = 12, minute = 20, second = 30;
 
-
+  HAL_GPIO_WritePin(GPIOA, DOT_Pin, SET);
+  HAL_GPIO_WritePin(GPIOA, RED_LED_Pin, SET);
   clearAll();
-  timer_flag[0] = 1;
-  timer_flag[1] = 1;
-  timer_flag[2] = 1;
+  setTimer(0, 200);
+  setTimer(1, 300);
+  setTimer(2, 500);
+  timer_flag[0] = timer_flag[1] = timer_flag[2] = 1;
   while (1)
   {
   	  if (timer_flag[0] == 1){
-  		  setTimer(0, 100);
+  		  setTimer(0, 1000);
   		  //TODO PA5
   		  HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin);
   		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
   	  }
   	  if (timer_flag[1] == 1){
-  		  setTimer(1, 25);
+  		  setTimer(1, 250);
   		  //TASK MAIN
   		  update7SEG(index_led);
   		  index_led = (index_led + 1) % 4;
   	  }
   	  if (timer_flag[2] == 1){
-  		  setTimer(2, 100);
+  		  setTimer(2, 1000);
   		  second++;
   		  if (second >= 60){
   			  second = 0;

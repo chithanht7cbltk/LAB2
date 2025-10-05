@@ -13,7 +13,7 @@ int timer_counter[10] = {0};
 int timer_flag[10] = {0};
 
 void setTimer(int index, int duration){
-	timer_counter[index] = duration;
+	timer_counter[index] = duration / TIMER_CYCLE;
 	timer_flag[index] = 0;
 }
 

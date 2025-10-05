@@ -8,6 +8,8 @@
 #ifndef INC_SOFTWARE_TIMER_H_
 #define INC_SOFTWARE_TIMER_H_
 
+#define TIMER_CYCLE 10
+
 void setTimer(int index, int duration);
 int isTimerExpired(int index);
 extern int timer_flag[10];
