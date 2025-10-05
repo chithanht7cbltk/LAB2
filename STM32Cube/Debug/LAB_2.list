@@ -80,7 +80,7 @@ Disassembly of section .text:
  *      Author: cthanh
  */
 
-#include "ex7.h"
+#include "ex8.h"
 
 void clearAll(){
  800014c:	b580      	push	{r7, lr}
@@ -758,7 +758,7 @@ void display7SEG(int num);
   int index_led = 0;
  8000608:	2300      	movs	r3, #0
  800060a:	607b      	str	r3, [r7, #4]
-  hour = 12, minute = 20, second = 30;
+  hour = 12, minute = 20, second = 55;
  800060c:	4b42      	ldr	r3, [pc, #264]	; (8000718 <main+0x12c>)
  800060e:	220c      	movs	r2, #12
  8000610:	601a      	str	r2, [r3, #0]
@@ -766,7 +766,7 @@ void display7SEG(int num);
  8000614:	2214      	movs	r2, #20
  8000616:	601a      	str	r2, [r3, #0]
  8000618:	4b41      	ldr	r3, [pc, #260]	; (8000720 <main+0x134>)
- 800061a:	221e      	movs	r2, #30
+ 800061a:	2237      	movs	r2, #55	; 0x37
  800061c:	601a      	str	r2, [r3, #0]
 
   HAL_GPIO_WritePin(GPIOA, DOT_Pin, SET);

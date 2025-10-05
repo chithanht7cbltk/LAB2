@@ -5,7 +5,7 @@
  *      Author: cthanh
  */
 
-#include "ex7.h"
+#include "ex8.h"
 
 void clearAll(){
 	HAL_GPIO_WritePin(GPIOA, EN0_Pin | EN1_Pin | EN2_Pin | EN3_Pin, SET);

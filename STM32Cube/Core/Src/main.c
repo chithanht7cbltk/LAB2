@@ -23,7 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "software_timer.h"
-#include "ex7.h"
+#include "ex8.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -97,7 +97,7 @@ void display7SEG(int num);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   int index_led = 0;
-  hour = 12, minute = 20, second = 30;
+  hour = 12, minute = 20, second = 55;
 
   HAL_GPIO_WritePin(GPIOA, DOT_Pin, SET);
   HAL_GPIO_WritePin(GPIOA, RED_LED_Pin, SET);

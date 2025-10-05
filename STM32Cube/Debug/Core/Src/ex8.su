@@ -1,0 +1,5 @@
+ex8.c:10:6:clearAll	8	static
+ex8.c:15:6:ValidPin	16	static
+ex8.c:31:6:display7SEG	16	static
+ex8.c:131:6:update7SEG	16	static
+ex8.c:153:6:updateClockBuffer	4	static
