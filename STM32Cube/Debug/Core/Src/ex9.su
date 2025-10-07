@@ -1,0 +1,7 @@
+ex9.c:10:6:clearAll	8	static
+ex9.c:16:6:ValidPin	16	static
+ex9.c:32:6:display7SEG	16	static
+ex9.c:132:6:update7SEG	16	static
+ex9.c:154:6:updateClockBuffer	4	static
+ex9.c:169:6:displayCol	16	static
+ex9.c:180:6:updateLEDMatrix	16	static

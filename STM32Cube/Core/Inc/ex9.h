@@ -17,5 +17,7 @@ void ValidPin(int index);
 void display7SEG(int num);
 void update7SEG(int index);
 void updateClockBuffer();
+void displayCol(int index);
+void updateLEDMatrix(int index);
 
 #endif /* INC_EX2_H_ */

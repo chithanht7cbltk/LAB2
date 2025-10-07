@@ -97,15 +97,18 @@ void display7SEG(int num);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   int index_led = 0;
+  int index_led_matrix = 0;
   hour = 12, minute = 20, second = 55;
 
   HAL_GPIO_WritePin(GPIOA, DOT_Pin, SET);
   HAL_GPIO_WritePin(GPIOA, RED_LED_Pin, SET);
+
   clearAll();
   setTimer(0, 200);
   setTimer(1, 300);
   setTimer(2, 500);
-  timer_flag[0] = timer_flag[1] = timer_flag[2] = 1;
+  setTimer(3, 100);
+  timer_flag[0] = timer_flag[1] = timer_flag[2] = timer_flag[3] = 1;
   while (1)
   {
   	  if (timer_flag[0] == 1){
@@ -135,6 +138,11 @@ void display7SEG(int num);
   			  hour = 0;
   		  }
   		  updateClockBuffer();
+  	  }
+  	  if (timer_flag[3] == 1){
+  		  setTimer(3, 10);
+  		  updateLEDMatrix(index_led_matrix);
+  		  index_led_matrix = (index_led_matrix + 1) % 8;
   	  }
     /* USER CODE END WHILE */
 
