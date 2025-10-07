@@ -23,7 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "software_timer.h"
-#include "ex9.h"
+#include "ex10.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -109,6 +109,7 @@ void display7SEG(int num);
   setTimer(2, 500);
   setTimer(3, 100);
   timer_flag[0] = timer_flag[1] = timer_flag[2] = timer_flag[3] = 1;
+  int t = 0;
   while (1)
   {
   	  if (timer_flag[0] == 1){
@@ -143,6 +144,11 @@ void display7SEG(int num);
   		  setTimer(3, 10);
   		  updateLEDMatrix(index_led_matrix);
   		  index_led_matrix = (index_led_matrix + 1) % 8;
+  		  t++;
+  		  if (t >= 8){
+  			  shiftMatrixLeft();
+  			  t = 0;
+  		  }
   	  }
     /* USER CODE END WHILE */
 

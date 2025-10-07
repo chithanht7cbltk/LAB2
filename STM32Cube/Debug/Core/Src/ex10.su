@@ -1,0 +1,11 @@
+ex10.c:10:6:clearAll	8	static
+ex10.c:16:6:ValidPin	16	static
+ex10.c:32:6:display7SEG	16	static
+ex10.c:132:6:update7SEG	16	static
+ex10.c:154:6:updateClockBuffer	4	static
+ex10.c:174:6:displayCol	16	static
+ex10.c:189:6:shiftMatrixLeft	16	static
+ex10.c:196:6:ClearMatrix	8	static
+ex10.c:206:6:Set_Col	16	static
+ex10.c:213:6:updateLEDMatrix	16	static
+ex10.c:254:6:scrollleft	4	static

@@ -5,7 +5,7 @@
  *      Author: cthanh
  */
 
-#include "ex9.h"
+#include "ex10.h"
 
 void clearAll(){
 	HAL_GPIO_WritePin(GPIOA, EN0_Pin | EN1_Pin | EN2_Pin | EN3_Pin, SET);
@@ -160,14 +160,19 @@ void updateClockBuffer(){
 
 const int MAX_LED_MATRIX = 8;
 int index_led_matrix = 0;
+int shift_index = 0;   // Biến điều khiển dịch sang trái
 
 uint8_t matrix_buffer[8] =
 {
 	0x18, 0x3C, 0x66, 0x66, 0x7E, 0x7E, 0x66, 0x66
 };
 
+uint16_t Col_Pin[8] = {ENM0_Pin, ENM1_Pin, ENM2_Pin, ENM3_Pin,
+					   ENM4_Pin, ENM5_Pin, ENM6_Pin, ENM7_Pin
+};
+
 void displayCol(int index){
-	HAL_GPIO_WritePin(GPIOA, ROW0_Pin, (matrix_buffer[index] & 0x01) ? RESET : SET);
+	HAL_GPIO_WritePin(GPIOA, ENM0_Pin, (matrix_buffer[index] & 0x01) ? RESET : SET);
 	HAL_GPIO_WritePin(GPIOA, ENM1_Pin, (matrix_buffer[index] & 0x02) ? RESET : SET);
 	HAL_GPIO_WritePin(GPIOA, ENM2_Pin, (matrix_buffer[index] & 0x04) ? RESET : SET);
 	HAL_GPIO_WritePin(GPIOA, ENM3_Pin, (matrix_buffer[index] & 0x08) ? RESET : SET);
@@ -175,10 +180,38 @@ void displayCol(int index){
 	HAL_GPIO_WritePin(GPIOA, ENM5_Pin, (matrix_buffer[index] & 0x20) ? RESET : SET);
 	HAL_GPIO_WritePin(GPIOA, ENM6_Pin, (matrix_buffer[index] & 0x40) ? RESET : SET);
 	HAL_GPIO_WritePin(GPIOA, ENM7_Pin, (matrix_buffer[index] & 0x80) ? RESET : SET);
+//	for (int i = 0; i < MAX_LED_MATRIX; i++){
+//		GPIO_PinState state = (matrix_buffer[index] & (1 << ((i + shift_index) % 8))) ? RESET : SET;
+//		HAL_GPIO_WritePin(GPIOA, Col_Pin[i], state);
+//	}
 }
 
+void shiftMatrixLeft() {
+	for (int i = 0; i < MAX_LED_MATRIX; i++) {
+		uint8_t lsb = (matrix_buffer[i] & 0x01) << 7;  // Lấy bit cao nhất (MSB)
+		matrix_buffer[i] = lsb | (matrix_buffer[i] >> 1) ; // Dịch trái và nối bit MSB vào LSB
+	}
+}
+
+void ClearMatrix(){
+	HAL_GPIO_WritePin(GPIOB,
+		ROW0_Pin | ROW1_Pin | ROW2_Pin | ROW3_Pin |
+		ROW4_Pin | ROW5_Pin | ROW6_Pin | ROW7_Pin,
+		SET);
+	HAL_GPIO_WritePin(GPIOA,
+		ENM0_Pin | ENM1_Pin | ENM2_Pin | ENM3_Pin |
+		ENM4_Pin | ENM5_Pin | ENM6_Pin | ENM7_Pin,
+		RESET);
+}
+void Set_Col(int index, GPIO_PinState state)
+{
+    HAL_GPIO_WritePin(GPIOB, Col_Pin[index], state);
+}
+
+int t[8]= {0};
+
 void updateLEDMatrix(int index){
-	HAL_GPIO_WritePin(GPIOB, ROW0_Pin | ROW1_Pin | ROW2_Pin | ROW3_Pin | ROW4_Pin | ROW5_Pin | ROW6_Pin | ROW7_Pin, SET);
+	ClearMatrix();
 	switch (index){
 	case 0:
 		displayCol(index);
@@ -216,3 +249,10 @@ void updateLEDMatrix(int index){
 		break;
 	}
 }
+
+//Hàm dịch ký tự sang trái
+void scrollleft()
+{
+    shift_index = (shift_index + 1) % 8;
+}
+
