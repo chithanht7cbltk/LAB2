@@ -250,9 +250,5 @@ void updateLEDMatrix(int index){
 	}
 }
 
-//Hàm dịch ký tự sang trái
-void scrollleft()
-{
-    shift_index = (shift_index + 1) % 8;
-}
+
 

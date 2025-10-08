@@ -8,4 +8,3 @@ ex10.c:189:6:shiftMatrixLeft	16	static
 ex10.c:196:6:ClearMatrix	8	static
 ex10.c:206:6:Set_Col	16	static
 ex10.c:213:6:updateLEDMatrix	16	static
-ex10.c:254:6:scrollleft	4	static

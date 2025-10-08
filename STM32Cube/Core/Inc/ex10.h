@@ -23,7 +23,6 @@ void displayCol(int index);
 void updateLEDMatrix(int index);
 void ClearMatrix();
 void Set_Col(int index, GPIO_PinState state);
-void scrollleft();
 
 void shiftMatrixLeft();
 
