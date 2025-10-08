@@ -871,14 +871,14 @@ void shiftMatrixLeft() {
  800071e:	2300      	movs	r3, #0
  8000720:	607b      	str	r3, [r7, #4]
  8000722:	e016      	b.n	8000752 <shiftMatrixLeft+0x3a>
-		uint8_t lsb = (matrix_buffer[i] & 0x01) << 7;  // Lấy bit cao nhất (MSB)
+		uint8_t lsb = (matrix_buffer[i] & 0x01) << 7;  // Lấy bit thấp nhất (LSB)
  8000724:	4a10      	ldr	r2, [pc, #64]	; (8000768 <shiftMatrixLeft+0x50>)
  8000726:	687b      	ldr	r3, [r7, #4]
  8000728:	4413      	add	r3, r2
  800072a:	781b      	ldrb	r3, [r3, #0]
  800072c:	01db      	lsls	r3, r3, #7
  800072e:	70fb      	strb	r3, [r7, #3]
-		matrix_buffer[i] = lsb | (matrix_buffer[i] >> 1) ; // Dịch trái và nối bit MSB vào LSB
+		matrix_buffer[i] = lsb | (matrix_buffer[i] >> 1) ; // Dịch trái và nối bit LSB vào MSB
  8000730:	4a0d      	ldr	r2, [pc, #52]	; (8000768 <shiftMatrixLeft+0x50>)
  8000732:	687b      	ldr	r3, [r7, #4]
  8000734:	4413      	add	r3, r2

@@ -188,8 +188,8 @@ void displayCol(int index){
 
 void shiftMatrixLeft() {
 	for (int i = 0; i < MAX_LED_MATRIX; i++) {
-		uint8_t lsb = (matrix_buffer[i] & 0x01) << 7;  // Lấy bit cao nhất (MSB)
-		matrix_buffer[i] = lsb | (matrix_buffer[i] >> 1) ; // Dịch trái và nối bit MSB vào LSB
+		uint8_t lsb = (matrix_buffer[i] & 0x01) << 7;  // Lấy bit thấp nhất (LSB)
+		matrix_buffer[i] = lsb | (matrix_buffer[i] >> 1) ; // Dịch trái và nối bit LSB vào MSB
 	}
 }
 
